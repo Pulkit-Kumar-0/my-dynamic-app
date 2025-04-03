@@ -26,16 +26,22 @@ pipeline {
                 archiveArtifacts artifacts: 'out/**', fingerprint: true
             }
         }
-            post {
-                success {
-                    echo 'Build and deployment completed successfully!'
-                }
-            failure {
+    post {
+        success {
+            echo 'Build and deployment completed successfully!'
+        }
+        failure {
             echo 'Build or deployment failed. Check the logs for details.'
-            }
-            always {
-                cleanWs()
-            }
-            }
+        }
+        always {
+            cleanWs()
+        }
+    
+    
+        }
+    
+    
+    
     }
+
 }
