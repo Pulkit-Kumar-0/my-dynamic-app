@@ -21,6 +21,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'npm run build'  // Skip 'npm run export' if not using static export
+                sh 'npm run export'
             }
         }
 
