@@ -14,13 +14,23 @@ pipeline {
             }
         }
 
-        // Stage 2: Set up Node.js environment
+        // // Stage 2: Set up Node.js environment
+        // stage('Setup') {
+        //     steps {
+        //         // Install the specified Node.js version
+        //         sh "curl -fsSL https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash -"
+        //         sh 'apt-get install -y nodejs'
+        //         // Verify Node.js and npm versions
+        //         sh 'node --version'
+        //         sh 'npm --version'
+        //     }
+        // }
+
         stage('Setup') {
             steps {
-                // Install the specified Node.js version
-                sh "curl -fsSL https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash -"
-                sh 'apt-get install -y nodejs'
-                // Verify Node.js and npm versions
+                sh 'sudo curl -fsSL https://deb.nodesource.com/setup_${NODE_VERSION}.x | sudo bash -'
+                sh 'sudo apt-get update' // Add this to refresh package lists
+                sh 'sudo apt-get install -y nodejs'
                 sh 'node --version'
                 sh 'npm --version'
             }
