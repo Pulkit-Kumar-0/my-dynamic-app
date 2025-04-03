@@ -40,7 +40,7 @@ pipeline {
             echo 'Build or deployment failed. Check the logs for details.'
         }
         always {
-            cleanWs()
+            
         }
     }
 }
