@@ -4,33 +4,23 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/Pulkit-Kumar-0/my-static-app.git'
+                checkout scm: [
+                    $class: 'GitSCM',
+                    branches: [[name: '*/main']],  // Change this if your default branch is different
+                    userRemoteConfigs: [[url: 'https://github.com/Pulkit-Kumar-0/my-static-app.git']]
+                ]
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                script {
-                    def installStatus = sh(script: 'npm install', returnStatus: true)
-                    if (installStatus != 0) {
-                        error "npm install failed"
-                    }
-                }
+                sh 'npm install'
             }
         }
 
         stage('Build') {
             steps {
-                script {
-                    def buildStatus = sh(script: 'npm run build', returnStatus: true)
-                    if (buildStatus != 0) {
-                        error "Build failed"
-                    }
-                    // def exportStatus = sh(script: 'npm run export', returnStatus: true)
-                    // if (exportStatus != 0) {
-                    //     error "Export failed"
-                    }
-                }
+                sh 'npm run build'  // Skip 'npm run export' if not using static export
             }
         }
 
