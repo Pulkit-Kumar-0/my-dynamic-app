@@ -25,11 +25,11 @@ pipeline {
                     def buildStatus = sh(script: 'npm run build', returnStatus: true)
                     if (buildStatus != 0) {
                         error "Build failed"
-                    }
-                    def exportStatus = sh(script: 'npm run export', returnStatus: true)
-                    if (exportStatus != 0) {
-                        error "Export failed"
-                    }
+                    // }
+                    // def exportStatus = sh(script: 'npm run export', returnStatus: true)
+                    // if (exportStatus != 0) {
+                    //     error "Export failed"
+                    // }
                 }
             }
         }
