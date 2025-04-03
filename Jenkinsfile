@@ -10,14 +10,27 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                sh 'npm install'
+                script {
+                    def installStatus = sh(script: 'npm install', returnStatus: true)
+                    if (installStatus != 0) {
+                        error "npm install failed"
+                    }
+                }
             }
         }
 
         stage('Build') {
             steps {
-                sh 'npm run build'
-                sh 'npm run export'
+                script {
+                    def buildStatus = sh(script: 'npm run build', returnStatus: true)
+                    if (buildStatus != 0) {
+                        error "Build failed"
+                    }
+                    def exportStatus = sh(script: 'npm run export', returnStatus: true)
+                    if (exportStatus != 0) {
+                        error "Export failed"
+                    }
+                }
             }
         }
 
@@ -26,6 +39,8 @@ pipeline {
                 archiveArtifacts artifacts: 'out/**', fingerprint: true
             }
         }
+    }
+
     post {
         success {
             echo 'Build and deployment completed successfully!'
@@ -36,12 +51,5 @@ pipeline {
         always {
             cleanWs()
         }
-    
-    
-        }
-    
-    
-    
     }
-
 }
