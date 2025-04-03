@@ -1,8 +1,17 @@
-// next.config.mjs
-export default {
-  reactStrictMode: true,
-  output: "export", // This will enable static export
-  images: {
-    unoptimized: true, // Disable image optimization (important for static export)
-  },
+/**
+ * @type {import('next').NextConfig}
+ */
+const nextConfig = {
+  output: "export",
+
+  // Optional: Change links `/me` -> `/me/` and emit `/me.html` -> `/me/index.html`
+  // trailingSlash: true,
+
+  // Optional: Prevent automatic `/me` -> `/me/`, instead preserve `href`
+  // skipTrailingSlashRedirect: true,
+
+  // Optional: Change the output directory `out` -> `dist`
+  // distDir: 'dist',
 };
+
+module.exports = nextConfig;
