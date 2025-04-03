@@ -10,7 +10,7 @@ pipeline {
         // Stage 1: Checkout the code from GitHub
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/your-username/my-dynamic-app.git'
+                git branch: 'main', url: 'https://github.com/Pulkit-Kumar-0/my-dynamic-app.git'
             }
         }
 
